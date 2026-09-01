@@ -21,10 +21,14 @@ body {
         radial-gradient(circle at 50% 90%, rgba(120, 0, 255, 0.25), transparent 35%),
         #050510;
 
-    overflow: hidden;
     position: relative;
 }
+body {
+    min-height: 100vh;
+    /* other properties... */
 
+    overflow-y: auto;
+}
 
 /* =========================
    CYBERPUNK GRID
@@ -287,7 +291,7 @@ h1 {
 .task {
     display: grid;
 
-    grid-template-columns: 1fr 75px;
+    grid-template-columns: 1fr 75px 85px;
 
     align-items: center;
 
@@ -301,10 +305,6 @@ h1 {
 
     border: 1px solid rgba(0, 255, 255, 0.35);
     border-radius: 10px;
-
-    box-shadow: 0 0 8px rgba(0, 255, 255, 0.1);
-
-    transition: 0.3s;
 }
 
 .task:hover {
@@ -362,4 +362,41 @@ h1 {
         0 0 25px rgba(255, 0, 140, 0.5);
 
     transform: scale(1.05);
+}
+.complete {
+    width: 85px;
+    flex-shrink: 0;
+
+    margin-left: 8px;
+    padding: 7px 0;
+
+    background: rgba(0, 255, 150, 0.1);
+
+    border: 1px solid #00ff99;
+    border-radius: 6px;
+
+    color: #00ff99;
+
+    font-family: inherit;
+    font-size: 12px;
+    font-weight: bold;
+
+    cursor: pointer;
+
+    transition: 0.3s;
+}
+
+.complete:hover {
+    background: #00ff99;
+    color: #050510;
+
+    box-shadow:
+        0 0 10px #00ff99,
+        0 0 25px rgba(0, 255, 150, 0.5);
+
+    transform: scale(1.05);
+}
+.completed span {
+    text-decoration: line-through;
+    opacity: 0.5;
 }
