@@ -1,0 +1,365 @@
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    font-family: "Courier New", monospace;
+    color: #ffffff;
+
+    /* Cyberpunk background */
+    background:
+        radial-gradient(circle at 20% 20%, rgba(255, 0, 140, 0.25), transparent 30%),
+        radial-gradient(circle at 80% 30%, rgba(0, 255, 255, 0.25), transparent 30%),
+        radial-gradient(circle at 50% 90%, rgba(120, 0, 255, 0.25), transparent 35%),
+        #050510;
+
+    overflow: hidden;
+    position: relative;
+}
+
+
+/* =========================
+   CYBERPUNK GRID
+   ========================= */
+
+body::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+
+    background-image:
+        linear-gradient(rgba(0, 255, 255, 0.08) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(0, 255, 255, 0.08) 1px, transparent 1px);
+
+    background-size: 45px 45px;
+
+    mask-image: linear-gradient(
+        to bottom,
+        transparent,
+        black 20%,
+        black 80%,
+        transparent
+    );
+
+    pointer-events: none;
+}
+
+
+/* =========================
+   GLOWING AMBIENT LIGHTS
+   ========================= */
+
+body::after {
+    content: "";
+    position: absolute;
+
+    width: 500px;
+    height: 500px;
+
+    background: #ff008c;
+    border-radius: 50%;
+
+    filter: blur(180px);
+    opacity: 0.15;
+
+    top: -200px;
+    left: -150px;
+
+    animation: glowMove 8s infinite alternate ease-in-out;
+
+    pointer-events: none;
+}
+
+@keyframes glowMove {
+    from {
+        transform: translate(0, 0);
+    }
+
+    to {
+        transform: translate(250px, 300px);
+    }
+}
+
+
+/* =========================
+   MAIN CARD
+   ========================= */
+
+.main {
+    position: relative;
+    z-index: 2;
+
+    width: 500px;
+
+    padding: 40px;
+
+    border-radius: 20px;
+
+    background: rgba(10, 10, 25, 0.75);
+
+    border: 1px solid rgba(0, 255, 255, 0.35);
+
+    backdrop-filter: blur(15px);
+
+    box-shadow:
+        0 0 20px rgba(0, 255, 255, 0.15),
+        0 0 60px rgba(255, 0, 140, 0.1),
+        inset 0 0 30px rgba(0, 255, 255, 0.03);
+
+    animation: cardFloat 4s ease-in-out infinite;
+}
+
+@keyframes cardFloat {
+    0%, 100% {
+        transform: translateY(0);
+    }
+
+    50% {
+        transform: translateY(-8px);
+    }
+}
+
+
+/* =========================
+   TITLE
+   ========================= */
+
+h1 {
+    text-align: center;
+
+    margin-bottom: 30px;
+
+    font-size: 38px;
+    letter-spacing: 5px;
+
+    color: #00ffff;
+
+    text-shadow:
+        0 0 5px #00ffff,
+        0 0 15px #00ffff,
+        0 0 35px #00ffff;
+
+    animation: titleGlow 2s infinite alternate;
+}
+
+@keyframes titleGlow {
+    from {
+        text-shadow:
+            0 0 5px #00ffff,
+            0 0 15px #00ffff;
+    }
+
+    to {
+        text-shadow:
+            0 0 10px #00ffff,
+            0 0 25px #00ffff,
+            0 0 45px #00ffff;
+    }
+}
+
+
+/* =========================
+   INPUT
+   ========================= */
+
+#taskInput {
+    width: 72%;
+
+    padding: 14px;
+
+    background: rgba(0, 0, 20, 0.7);
+
+    border: 1px solid #00ffff;
+
+    border-radius: 8px;
+
+    color: #ffffff;
+
+    font-size: 15px;
+
+    font-family: inherit;
+
+    outline: none;
+
+    box-shadow:
+        0 0 8px rgba(0, 255, 255, 0.2);
+
+    transition: 0.3s;
+}
+
+#taskInput::placeholder {
+    color: rgba(255, 255, 255, 0.45);
+}
+
+#taskInput:focus {
+    border-color: #ff008c;
+
+    box-shadow:
+        0 0 10px #ff008c,
+        0 0 25px rgba(255, 0, 140, 0.4);
+}
+
+
+/* =========================
+   SUBMIT BUTTON
+   ========================= */
+
+.submit {
+    padding: 14px 18px;
+
+    margin-left: 5px;
+
+    border: 1px solid #ff008c;
+
+    border-radius: 8px;
+
+    background: rgba(255, 0, 140, 0.15);
+
+    color: #ff4db8;
+
+    font-family: inherit;
+    font-weight: bold;
+
+    cursor: pointer;
+
+    transition: 0.3s;
+
+    box-shadow:
+        0 0 10px rgba(255, 0, 140, 0.25);
+}
+
+.submit:hover {
+    background: #ff008c;
+
+    color: white;
+
+    box-shadow:
+        0 0 10px #ff008c,
+        0 0 30px #ff008c,
+        0 0 60px rgba(255, 0, 140, 0.5);
+
+    transform: translateY(-2px);
+}
+
+
+/* =========================
+   TASK LIST
+   ========================= */
+
+#taskList {
+    margin-top: 30px;
+}
+
+
+/* =========================
+   MOBILE
+   ========================= */
+
+@media (max-width: 600px) {
+
+    .main {
+        width: 90%;
+        padding: 25px;
+    }
+
+    h1 {
+        font-size: 30px;
+    }
+
+    #taskInput {
+        width: 100%;
+        margin-bottom: 10px;
+    }
+
+    .submit {
+        width: 100%;
+        margin-left: 0;
+    }
+}
+.task {
+    display: grid;
+
+    grid-template-columns: 1fr 75px;
+
+    align-items: center;
+
+    width: 100%;
+    min-height: 50px;
+
+    margin-bottom: 12px;
+    padding: 10px 12px;
+
+    background: rgba(0, 255, 255, 0.05);
+
+    border: 1px solid rgba(0, 255, 255, 0.35);
+    border-radius: 10px;
+
+    box-shadow: 0 0 8px rgba(0, 255, 255, 0.1);
+
+    transition: 0.3s;
+}
+
+.task:hover {
+    border-color: #00ffff;
+
+    box-shadow:
+        0 0 10px rgba(0, 255, 255, 0.3),
+        0 0 25px rgba(0, 255, 255, 0.1);
+
+    transform: translateX(4px);
+}
+
+
+/* Task text */
+
+.task span {
+    min-width: 0;
+
+    color: white;
+    font-size: 16px;
+
+    overflow-wrap: anywhere;
+}
+
+
+/* Delete button */
+
+.delete {
+    width: 75px;
+
+    padding: 7px 0;
+
+    background: rgba(255, 0, 140, 0.1);
+
+    border: 1px solid #ff008c;
+    border-radius: 6px;
+
+    color: #ff4db8;
+
+    font-family: inherit;
+    font-size: 12px;
+    font-weight: bold;
+
+    cursor: pointer;
+
+    transition: 0.3s;
+}
+
+.delete:hover {
+    background: #ff008c;
+    color: white;
+
+    box-shadow:
+        0 0 10px #ff008c,
+        0 0 25px rgba(255, 0, 140, 0.5);
+
+    transform: scale(1.05);
+}
