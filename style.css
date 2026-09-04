@@ -396,7 +396,7 @@ h1 {
 
     transform: scale(1.05);
 }
-.completed span {
+.completed {
     text-decoration: line-through;
     opacity: 0.5;
 }
