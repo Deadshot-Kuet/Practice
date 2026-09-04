@@ -400,3 +400,43 @@ h1 {
     text-decoration: line-through;
     opacity: 0.5;
 }
+.progress {
+    width: 90%;
+    margin: 18px auto 0;
+    padding: 12px 16px;
+
+    background: rgba(15, 15, 30, 0.8);
+    border: 1px solid rgba(0, 255, 255, 0.35);
+    border-radius: 12px;
+
+    box-shadow: 0 0 12px rgba(0, 255, 255, 0.12);
+}
+
+.progress h2 {
+    margin: 0 0 10px;
+    font-size: 18px;
+    color: #00ffff;
+    text-shadow: 0 0 7px #00ffff;
+    text-align: center;
+}
+
+.progress p {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    margin: 6px 0;
+    padding: 7px 10px;
+
+    background: rgba(255, 255, 255, 0.04);
+    border-radius: 6px;
+
+    color: white;
+    font-size: 14px;
+}
+
+.progress span {
+    font-size: 15px;
+    font-weight: bold;
+    color: #00ffff;
+}
