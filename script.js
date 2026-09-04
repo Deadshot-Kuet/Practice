@@ -5,11 +5,13 @@ const taskArray = JSON.parse(localStorage.getItem("tasks")) || [];
 function show(){
     taskList.innerHTML=""
     taskArray.forEach(task => {
-         taskList.innerHTML+=`
-     <div class="task">
-     <span>${task}</span>
+     taskList.innerHTML+=`
+     <div class="task ${task.completed?"completed":""}">
+     <span>${task.text}</span>
      <button class="delete">Delete</button>
-     <button class="complete">Complete</button>
+        ${task.completed?`<button class="complete">Completed</button>`:
+            `<button class="complete">Complete</button>`
+        }
      </div>`
     });
 }
@@ -19,39 +21,42 @@ submit.addEventListener("click",function(){
     return;
  }
  else{
-     taskList.innerHTML+=`
-     <div class="task">
-     <span>${task}</span>
-     <button class="delete">Delete</button>
-     <button class="complete">Complete</button>
-     </div>`
-     taskArray.push(task)
+     taskArray.push({
+        text:task,
+        completed:false
+     })
  }
  taskInput.value="";
  localStorage.setItem("tasks",JSON.stringify(taskArray))
+ show()
 }
 ) 
 show()
 taskList.addEventListener("click", function(event) {
     if (event.target.classList.contains("delete")) {
-        const index=taskArray.indexOf(event.target.parentElement.querySelector("span").innerHTML)
+        const index=taskArray.findIndex(task=>task.text===event.target.parentElement.querySelector("span").innerHTML)
         event.target.parentElement.remove();
         taskArray.splice(index,1)
         localStorage.setItem("tasks", JSON.stringify(taskArray));
     }
     if (event.target.classList.contains("complete")) {
         event.target.parentElement.classList.toggle("completed");  
+        const index=taskArray.findIndex(task=>task.text===event.target.parentElement.querySelector("span").innerHTML)
         if(event.target.innerHTML==="Complete"){
         event.target.innerHTML="Completed"
+        taskArray[index].completed=!taskArray[index].completed
+        localStorage.setItem("tasks", JSON.stringify(taskArray));
     }
     else{
         event.target.innerHTML="Complete"
+        taskArray[index].completed=!taskArray[index].completed
+        localStorage.setItem("tasks", JSON.stringify(taskArray));
     }
     }
     });
-    taskInput.addEventListener("keydown",function(event){
-        if(event.key==="Enter"){
-            submit.click();
-        }
+taskInput.addEventListener("keydown",function(event){
+    if(event.key==="Enter"){
+         submit.click();
+    }
     })
     
